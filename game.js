@@ -19,7 +19,7 @@ let rushUsed = false;
 let botDifficulty = 'medium';
 let shards = localStorage.getItem('shards') ? parseInt(localStorage.getItem('shards')) : 0;
 let upgrades = JSON.parse(localStorage.getItem('upgrades')) || { handSize: 4, hpBoost: 0, relicChance: 0 };
-let botUpgrades = { handSize: 4, hpBoost: 0, relicChance: 0 }; // Прокачка бота
+let botUpgrades = { handSize: 4, hpBoost: 0, relicChance: 0 }; 
 
 // Загрузка звуков
 window.isSoundEnabled = true; // Звук включён по умолчанию
@@ -227,7 +227,7 @@ function isValidMove(card, chain) {
     // 2. Проверяем, совпадает ли номер с последней картой
     if (card.number === lastCard.number) return true;
 
-    // 3. Проверяем, отличается ли номер на ±1 от ЛЮБОЙ карты в цепочке
+    // 3. Проверяем, отличается ли номер на ±1 от любой карты в цепочке
     for (let chainCard of chain) {
         if (chainCard.number && Math.abs(card.number - chainCard.number) === 1) {
             return true;
