@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elemental Clash</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-fire">
+    <div id="main-menu" class="screen">
+        <h1>Elemental Clash</h1>
+        <div id="shards-display">Shards: 0</div> <!-- Добавляем отображение Shards -->
+        <button id="play-btn">Play</button>
+        <button id="campaign-btn">Campaign</button>
+        <button id="shop-btn">Shop</button> <!-- Кнопка для перехода в магазин -->
+        <button id="settings-btn">Settings</button>
+        <button id="rules-btn">Rules</button>
+    </div>
+
+    <div id="shop-screen" class="screen hidden">
+        <h1>Shop</h1>
+        <div id="shards-in-shop">Shards: 0</div>
+        <div id="upgrades">
+            <h3>Upgrades</h3>
+            <div id="upgrade-hand-size">
+                <p>Increase Hand Size (Current: <span id="hand-size-level">4</span>)</p>
+                <p>Cost: <span id="hand-size-cost">10</span> Shards</p>
+                <button id="buy-hand-size">Buy</button>
+            </div>
+            <div id="upgrade-hp-boost">
+                <p>Increase Starting HP (Current: <span id="hp-boost-level">0</span>)</p>
+                <p>Cost: <span id="hp-boost-cost">15</span> Shards</p>
+                <button id="buy-hp-boost">Buy</button>
+            </div>
+            <div id="upgrade-relic-chance">
+                <p>Increase Relic Chance (Current: <span id="relic-chance-level">0%</span>)</p>
+                <p>Cost: <span id="relic-chance-cost">20</span> Shards</p>
+                <button id="buy-relic-chance">Buy</button>
+            </div>
+        </div>
+        <button id="back-from-shop-btn">Back</button>
+    </div>
+
+    <div id="settings-screen" class="screen hidden">
+        <h1>Settings</h1>
+        <label>Bot Difficulty:
+            <select id="bot-difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </label>
+        <label>Theme:
+            <select id="theme-select">
+                <option value="fire">Fire</option>
+                <option value="water">Water</option>
+                <option value="earth">Earth</option>
+                <option value="air">Air</option>
+            </select>
+        </label>
+        <label>Sound:
+            <button id="enable-sound-btn">Enable Sound</button>
+        </label>
+        <button id="back-from-settings-btn">Back</button>
+    </div>
+
+    <div id="rules-screen" class="screen hidden">
+        <h1>Rules</h1>
+        <div class="rules-text">
+            <p>Welcome to <strong>Elemental Clash</strong>! Duel your opponent by building chains to attack their Crystal (100 HP) or defend your own.</p>
+            <p><strong>Goal:</strong> Reduce enemy HP to 0 or have more HP after 120 seconds.</p>
+            <p><strong>Actions:</strong></p>
+            <ul>
+                <li>Add a card (±1 from any card in chain, same element, or same number) or Relic (anytime) to your chain.</li>
+                <li>Activate chain (4+ cards) for 75% damage or trigger effects.</li>
+                <li>Reset chain to start anew.</li>
+                <li>Drop cards in Vortex for bonuses (visible until bonus triggers).</li>
+                <li>Store cards in Storage (max 3) on the right side to save for later; drag back to hand when needed.</li>
+            </ul>
+            <p><strong>Elemental Effects (3+ of one type):</strong></p>
+            <ul>
+                <li><span class="fire">Fire</span>: x2 damage (x3 at 4+).</li>
+                <li><span class="water">Water</span>: Heal (full at 4+).</li>
+                <li><span class="earth">Earth</span>: Shield (50% block).</li>
+                <li><span class="air">Air</span>: Disrupt enemy's hand.</li>
+            </ul>
+            <p><strong>Combos (2+ of two types, 5+ cards):</strong> Unique effects like Steam or Dust Storm.</p>
+            <p><strong>Rush:</strong> 6+ cards, x1.5 damage, effects for 3+.</p>
+            <p><strong>Vortex:</strong> Sacrifice cards for bonuses (e.g., 3 of same element = +10 HP).</p>
+            <p><strong>Events:</strong> Random effects every 20s (e.g., Elemental Storm).</p>
+        </div>
+        <button id="back-from-rules-btn">Back</button>
+    </div>
+
+    <div id="campaign-screen" class="screen hidden">
+        <h1>Campaign</h1>
+        <div id="campaign-levels"></div>
+        <button id="back-from-campaign-btn">Back</button>
+    </div>
+
+    <div id="game-screen" class="screen hidden">
+        <div id="timer">Time: 120</div>
+        <div id="scores">
+            <span id="player-hp">Player HP: 100</span>
+            <span id="bot-hp">Bot HP: 100</span>
+            <span id="shards">Shards: 0</span>
+        </div>
+        <div id="event-text"></div>
+        <div id="player-chain-area">
+            <h3>Your Chain</h3>
+            <div id="player-chain" class="drop-zone"></div>
+        </div>
+        <div id="vortex-area">
+            <h3>Vortex</h3>
+            <div id="vortex" class="drop-zone"></div>
+        </div>
+        <div id="bot-chain-area">
+            <h3>Bot Chain</h3>
+            <div id="bot-chain" class="drop-zone"></div>
+        </div>
+        <div id="hand-area">
+            <h3>Your Hand</h3>
+            <div id="hand"></div>
+        </div>
+        <div id="storage-area">
+            <h3>Storage (Max 3)</h3>
+            <div id="storage" class="drop-zone"></div>
+        </div>
+        <button id="activate-btn" disabled>Activate Chain</button>
+        <button id="rush-btn" disabled>Rush of Elements</button>
+        <button id="reset-btn">Reset Chain</button>
+        <button id="back-to-menu-btn">Back to Menu</button>
+    </div>
+
+    <script src="game.js"></script>
+    <script src="menu.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92c67d46dac7dd19',t:'MTc0Mzk5NzA3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

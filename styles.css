@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Press Start 2P', cursive;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: background 0.5s;
+}
+
+body.theme-fire { background: url('assets/sprites/background-fire.png') no-repeat center/cover; }
+body.theme-water { background: url('assets/sprites/background-water.png') no-repeat center/cover; }
+body.theme-earth { background: url('assets/sprites/background-earth.png') no-repeat center/cover; }
+body.theme-air { background: url('assets/sprites/background-air.png') no-repeat center/cover; }
+
+.screen {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 4px solid #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    image-rendering: pixelated;
+    position: relative;
+    width: 80%;
+    max-width: 1200px;
+}
+
+.hidden { display: none; }
+
+h1 { font-size: 32px; text-shadow: 2px 2px 0 #000; margin-bottom: 20px; }
+h3 { font-size: 16px; text-shadow: 1px 1px 0 #000; margin: 10px 0; }
+
+button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    padding: 10px 20px;
+    margin: 5px;
+    background: url('assets/sprites/button.png') no-repeat center/cover;
+    color: #fff;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+button:hover { transform: scale(1.05); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+#timer, #scores, #shards, #event-text {
+    font-size: 16px;
+    text-shadow: 1px 1px 0 #000;
+    margin: 10px 0;
+}
+
+#scores span { margin: 0 20px; }
+
+#player-chain-area, #bot-chain-area, #hand-area, #vortex-area {
+    margin: 20px 0;
+}
+
+#player-chain, #bot-chain, #hand, #vortex, #storage {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 130px;
+}
+
+.drop-zone {
+    border: 4px dashed #fff;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    transition: background 0.3s;
+}
+
+#vortex { background: url('assets/sprites/vortex.png') no-repeat center/cover; }
+#storage { background: rgba(255, 255, 255, 0.2); }
+.drop-zone.drag-over { background: rgba(255, 255, 255, 0.3); }
+.drop-zone.attacked { animation: shake 0.5s; }
+
+.card {
+    width: 80px;
+    height: 120px;
+    background: url('assets/sprites/card-base.png') no-repeat center/cover;
+    border: 4px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.3s, opacity 0.3s;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.card.Fire { background: url('assets/sprites/card-fire.png') no-repeat center/cover; }
+.card.Water { background: url('assets/sprites/card-water.png') no-repeat center/cover; }
+.card.Earth { background: url('assets/sprites/card-earth.png') no-repeat center/cover; }
+.card.Air { background: url('assets/sprites/card-air.png') no-repeat center/cover; }
+
+.card.dragging { opacity: 0.5; transform: scale(1.1); }
+.card.placed { animation: placeCard 0.3s ease; }
+
+@keyframes placeCard {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+label { font-size: 14px; margin: 10px 0; display: block; }
+select {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    padding: 5px;
+    background: #444;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.rules-text {
+    font-size: 12px;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #fff;
+}
+
+.rules-text .fire { color: #ff5555; }
+.rules-text .water { color: #55aaff; }
+.rules-text .earth { color: #aa8855; }
+.rules-text .air { color: #aaddff; }
+
+#campaign-levels button { display: block; margin: 10px auto; }
+
+#storage-area {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 4px solid #fff;
+    padding: 10px;
+}
+
+#storage {
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#enable-sound-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin: 5px;
+    background: url('assets/sprites/button.png') no-repeat center/cover;
+    color: #fff;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#enable-sound-btn:hover {
+    transform: scale(1.05);
+}
+
+#enable-sound-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Стили для отображения Shards в главном меню */
+#shards-display, #shards-in-shop {
+    font-size: 16px;
+    text-shadow: 1px 1px 0 #000;
+    margin: 10px 0;
+}
+
+/* Стили для экрана магазина */
+#upgrades {
+    margin: 20px 0;
+}
+
+#upgrades div {
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #fff;
+}
+
+#upgrades p {
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+/* Стили для ползунков громкости */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 200px;
+    height: 10px;
+    background: #444;
+    border: 2px solid #fff;
+    outline: none;
+    margin: 5px 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #000;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #000;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background: #ddd;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    background: #ddd;
+}

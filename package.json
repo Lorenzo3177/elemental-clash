@@ -1,0 +1,16 @@
+{
+  "name": "cardgame",
+  "version": "1.0.0",
+  "main": "game.js",
+  "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "dev": "live-server --open=index.html"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
