@@ -33,7 +33,6 @@ const campaignLevels = [
     { name: 'Elemental Overlord', difficulty: 'hard' }
 ];
 
-// Запускаем фоновую музыку при загрузке страницы, так как звук включён по умолчанию
 window.addEventListener('DOMContentLoaded', () => {
     if (window.isSoundEnabled) {
         window.sounds.backgroundMusic.loop = true;
@@ -45,19 +44,15 @@ window.addEventListener('DOMContentLoaded', () => {
     let shards = localStorage.getItem('shards') ? parseInt(localStorage.getItem('shards')) : 0;
     let upgrades = JSON.parse(localStorage.getItem('upgrades')) || { handSize: 4, hpBoost: 0, relicChance: 0 };
 
-    // Отображаем Shards в главном меню
     shardsDisplay.textContent = `Shards: ${shards}`;
 });
 
-// Функция для обновления интерфейса магазина
 function updateShopUI() {
     let shards = localStorage.getItem('shards') ? parseInt(localStorage.getItem('shards')) : 0;
     let upgrades = JSON.parse(localStorage.getItem('upgrades')) || { handSize: 4, hpBoost: 0, relicChance: 0 };
 
-    // Обновляем отображение Shards
     shardsInShop.textContent = `Shards: ${shards}`;
 
-    // Обновляем уровни улучшений и стоимость
     const handSizeUpgradeCost = 10 + (upgrades.handSize - 4) * 5; // 10, 15, 20...
     const hpBoostUpgradeCost = 15 + (upgrades.hpBoost / 10) * 5; // 15, 20, 25...
     const relicChanceUpgradeCost = 20 + (upgrades.relicChance / 0.1) * 5; // 20, 25, 30...
@@ -69,7 +64,6 @@ function updateShopUI() {
     relicChanceLevel.textContent = `${Math.round(upgrades.relicChance * 100)}%`;
     relicChanceCost.textContent = relicChanceUpgradeCost;
 
-    // Отключаем кнопки, если не хватает Shards
     buyHandSizeBtn.disabled = shards < handSizeUpgradeCost || upgrades.handSize >= 8; // Максимум 8 карт в руке
     buyHpBoostBtn.disabled = shards < hpBoostUpgradeCost || upgrades.hpBoost >= 50; // Максимум +50 HP
     buyRelicChanceBtn.disabled = shards < relicChanceUpgradeCost || upgrades.relicChance >= 0.5; // Максимум 50% шанса
@@ -101,7 +95,7 @@ campaignBtn.addEventListener('click', () => {
 shopBtn.addEventListener('click', () => {
     document.getElementById('main-menu').classList.add('hidden');
     document.getElementById('shop-screen').classList.remove('hidden');
-    updateShopUI(); // Обновляем интерфейс магазина
+    updateShopUI(); 
     window.playSound(window.sounds.buttonClick);
 });
 
@@ -110,10 +104,8 @@ settingsBtn.addEventListener('click', () => {
     document.getElementById('settings-screen').classList.remove('hidden');
     window.playSound(window.sounds.buttonClick);
 
-    // Обновляем текст кнопки в зависимости от состояния звука
     enableSoundBtn.textContent = window.isSoundEnabled ? 'Disable Sound' : 'Enable Sound';
 
-    // Обработчик для кнопки переключения звука
     if (enableSoundBtn) {
         enableSoundBtn.addEventListener('click', () => {
             window.isSoundEnabled = !window.isSoundEnabled;
@@ -178,7 +170,6 @@ if (localStorage.getItem('theme')) {
     document.body.className = `theme-${localStorage.getItem('theme')}`;
 }
 
-// Обработчики для покупки улучшений
 buyHandSizeBtn.addEventListener('click', () => {
     let shards = parseInt(localStorage.getItem('shards')) || 0;
     let upgrades = JSON.parse(localStorage.getItem('upgrades')) || { handSize: 4, hpBoost: 0, relicChance: 0 };
